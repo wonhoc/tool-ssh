@@ -3,8 +3,8 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# 의존성 파일 복사 및 설치
-COPY package*.json ./
+# 의존성 파일 복사 및 설치 (package-lock.json 포함)
+COPY package*.json package-lock.json ./
 RUN npm ci
 
 # 소스 파일 복사 및 빌드
@@ -16,8 +16,8 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-# 프로덕션 의존성만 설치
-COPY package*.json ./
+# 프로덕션 의존성만 설치 (package-lock.json 포함)
+COPY package*.json package-lock.json ./
 RUN npm ci --omit=dev
 
 # 빌드된 파일만 복사
