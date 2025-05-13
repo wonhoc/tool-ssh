@@ -1,27 +1,23 @@
 # 빌드 단계
 FROM node:22-alpine AS builder
-
 WORKDIR /app
-
-# 의존성 파일 복사 및 설치 (package-lock.json 포함)
 COPY package*.json package-lock.json ./
 RUN npm ci
-
-# 소스 파일 복사 및 빌드
 COPY . .
+# 개발 환경 빌드 (.env.developer 파일을 사용)
 RUN npm run build:dev
 
 # 실행 단계
 FROM node:22-alpine
-
 WORKDIR /app
-
-# 프로덕션 의존성만 설치 (package-lock.json 포함)
 COPY package*.json package-lock.json ./
 RUN npm ci --omit=dev
-
-# 빌드된 파일만 복사
 COPY --from=builder /app/dist ./dist
 
+# 개발 환경 기본 변수 설정
+ENV NODE_ENV=development
+ENV PORT=3001
+
 EXPOSE 3001
-CMD ["npm", "run", "start:dev"]
+# 개발 환경용 시작 명령어
+CMD ["node", "dist/server.js"]

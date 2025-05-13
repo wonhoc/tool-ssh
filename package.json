@@ -28,9 +28,9 @@
     },
     "scripts": {
         "dev": "dotenv -e .env.local -- ts-node-dev --respawn --transpile-only src/server.ts",
-        "build:dev": "dotenv -e .env.dev -- tsc",
-        "build:prod": "dotenv -e .env.prod -- tsc",
-        "start:dev": "dotenv -e .env.dev -- node dist/server.js",
-        "start:prod": "dotenv -e .env.prod -- node dist/server.js"
+        "build:dev": "dotenv -e .env.developer -- tsc",
+        "build:prod": "dotenv -e .env.production -- tsc",
+        "start:dev": "dotenv -e .env.developer -- node dist/server.js",
+        "start:prod": "dotenv -e .env.production -- node dist/server.js"
     }
 }
