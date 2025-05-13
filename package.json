@@ -30,7 +30,7 @@
         "dev": "dotenv -e .env.local -- ts-node-dev --respawn --transpile-only src/server.ts",
         "build:dev": "dotenv -e .env.developer -- tsc",
         "build:prod": "dotenv -e .env.production -- tsc",
-        "start:dev": "dotenv -e .env.developer -- node dist/server.js",
-        "start:prod": "dotenv -e .env.production -- node dist/server.js"
+        "start:dev": "node dist/server.js",
+        "start:prod": "node dist/server.js"
     }
 }
